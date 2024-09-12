@@ -1,12 +1,20 @@
-import { Button } from "./components/ui/button";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Layout } from "./components/Layout";
+import { Clients } from "./Pages/Clients";
+import { Movies } from "./Pages/Movies";
+import "./App.css";
 
 function App() {
   return (
     <>
-      <div>
-        <h1 className="text-3xl font-bold underline mb-5">Hello world!</h1>
-        <Button>Hola</Button>
-      </div>
+      <BrowserRouter>
+        <Layout>
+          <Routes>
+            <Route index element={<Clients />} />
+            <Route path="/movies" element={<Movies />} />
+          </Routes>
+        </Layout>
+      </BrowserRouter>
     </>
   );
 }
