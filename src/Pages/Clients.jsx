@@ -19,7 +19,7 @@ export function Clients() {
   }, []);
 
   return (
-    <div>
+    <div className="container mx-auto">
       <DataTable columns={columns} data={dataClients} />
     </div>
   );
