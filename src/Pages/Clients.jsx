@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/api/supabase";
+import { DataTable } from "@/components/tables/clients/data-table";
+import { columns } from "@/components/tables/clients/columns";
 
 export function Clients() {
   const [dataClients, setDataClients] = useState([]);
@@ -18,10 +20,7 @@ export function Clients() {
 
   return (
     <div>
-      <h1>Clients</h1>
-      {dataClients.map((client) => (
-        <li key={client.id}>{client.name}</li>
-      ))}
+      <DataTable columns={columns} data={dataClients} />
     </div>
   );
 }
