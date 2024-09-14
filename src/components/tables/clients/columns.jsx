@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-//import { DialogDelete } from "../DialogDelete";
+import { DialogDelete } from "@/components/DialogDelete";
 
 export const columns = [
   {
@@ -101,7 +101,7 @@ export const columns = [
             </Button>
           </Link>
 
-          {/* <DialogDelete table={"clients"} id={row.getValue("id")} /> */}
+          <DialogDelete table={"clients"} id={row.getValue("id")} />
         </div>
       );
     },

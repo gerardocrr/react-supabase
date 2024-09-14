@@ -8,7 +8,10 @@ export function Clients() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("clients").select();
+      const { data, error } = await supabase
+        .from("clients")
+        .select()
+        .order("created_at", { ascending: false });
       if (error) {
         console.log("Error fetching data:", error.message);
       } else {
