@@ -10,18 +10,13 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
+import { deleteClient } from "@/api/clients";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "@/api/supabase";
 
 export function DialogDelete({ table, id }) {
   const navigate = useNavigate();
   const handleDelete = async () => {
-    const response = await supabase.from(table).delete().eq("id", id);
-    if (response.status === 204) {
-      navigate(0);
-    } else {
-      console.log("Error deleting data:", error.message);
-    }
+    deleteClient(id, navigate);
   };
   return (
     <AlertDialog>

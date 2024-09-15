@@ -11,7 +11,7 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { useNavigate, useParams } from "react-router-dom";
-import { supabase } from "@/api/supabase";
+import { insertClient, getClientById, updateClient } from "@/api/clients";
 
 export function FormClient() {
   const navigate = useNavigate();
@@ -27,23 +27,7 @@ export function FormClient() {
   useEffect(() => {
     if (params.id) {
       setIsUpdate(true);
-      const fetchData = async () => {
-        const { data, error } = await supabase
-          .from("clients")
-          .select()
-          .eq("id", params.id);
-        if (error) {
-          console.log("Error fetching data:", error.message);
-        } else {
-          setFormData(() => ({
-            name: data[0].name,
-            status: data[0].status,
-            email: data[0].email,
-            amount: parseFloat(data[0].amount),
-          }));
-        }
-      };
-      fetchData();
+      getClientById(params.id, setFormData);
     } else {
       setIsUpdate(false);
     }
@@ -60,22 +44,9 @@ export function FormClient() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isUpdate) {
-      const { error } = await supabase.from("clients").insert(formData);
-      if (error) {
-        console.log("Error inserting data:", error.message);
-      } else {
-        navigate("/");
-      }
+      insertClient(formData, navigate);
     } else {
-      const { error } = await supabase
-        .from("clients")
-        .update(formData)
-        .eq("id", params.id);
-      if (error) {
-        console.log("Error updating data:", error.message);
-      } else {
-        navigate("/");
-      }
+      updateClient(formData, params.id, navigate);
     }
   };
 
